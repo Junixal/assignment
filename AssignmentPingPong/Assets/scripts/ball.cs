@@ -44,6 +44,14 @@ public class ball : MonoBehaviour {
 
             GetComponent<Rigidbody2D>().velocity = way * move;
         }
+
+        if(collision.gameObject.name == "wallLeft")
+        {
+            this.transform.position = Vector3.zero;
+            this.GetComponent<Rigidbody2D>
+            ScoreBoard.instance.Player1AddScore();
+            StartCoroutine(PausePeriodAfterGoal());
+        }
     }
 
     // Update is called once per frame
