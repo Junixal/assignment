@@ -5,10 +5,22 @@ using UnityEngine;
 public class ball : MonoBehaviour {
     public float move = 30; //made public for easier tweaking
 
+    private Rigidbody2D BallRigid;
+    
+
+    
+
+
 	// Use this for initialization
 	void Start () {
-        GetComponent<Rigidbody2D>().velocity = Vector2.right * move; 
-	}
+        GetComponent<Rigidbody2D>().velocity = Vector2.right * move;
+
+        StartCoroutine(Pause());
+        BallRigid = this.GetComponent<Rigidbody2D>();
+
+        
+
+    }
     float Hit(Vector2 ballPos, Vector2 paddlePos,
                 float paddleHeight)
     {
@@ -20,7 +32,7 @@ public class ball : MonoBehaviour {
         // ||  1 <- the top of the paddle
         return (ballPos.y - paddlePos.y) / paddleHeight;
     }
-    //colition has the colission information if the ball enteracts with the paddle then...
+    //colition has the colission information if the ball enteracts with then...
     private void OnCollisionEnter2D(Collision2D collision)
     {
        //if enteracts with left paddle
@@ -47,15 +59,46 @@ public class ball : MonoBehaviour {
 
         if(collision.gameObject.name == "wallLeft")
         {
-            this.transform.position = Vector3.zero;
-            this.GetComponent<Rigidbody2D>
-            ScoreBoard.instance.Player1AddScore();
-            StartCoroutine(PausePeriodAfterGoal());
+            this.transform.position = new Vector3(0,0,0);
+            BallRigid.velocity = new Vector3(0, 0, 0);
+            ScoreBoard.instance.Player2AddScore();
+            StartCoroutine(Pause());
         }
+
+        if (collision.gameObject.name == "wallRight")
+        {
+            this.transform.position = new Vector3(0, 0, 0);
+            BallRigid.velocity = new Vector3(0, 0, 0);
+            ScoreBoard.instance.Player1AddScore();
+            StartCoroutine(Pause());
+        }
+    }
+
+    void ResetBall()
+    {
+        this.transform.position = new Vector3(0,0,0);
+        int DirectY = Random.Range(-1, 2);
+        int DirectX = Random.Range(-1, 2);
+
+        if(DirectX == 0)
+        {
+            DirectX = 1;
+        }
+
+        BallRigid.velocity = new Vector2(move * DirectX, move * DirectY);
+    }
+
+    IEnumerator Pause()
+    {
+        yield return new WaitForSeconds(2f);
+
+        ResetBall();
+
     }
 
     // Update is called once per frame
     void Update () {
 		
 	}
+    
 }

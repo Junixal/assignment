@@ -20,7 +20,8 @@ public class ScoreBoard : MonoBehaviour {
     void Start () {
         instance = this;
 
-        player1Score = player2Score = 0;
+        player1Score = 0;
+        player2Score = 0;
 
 	}
 	
