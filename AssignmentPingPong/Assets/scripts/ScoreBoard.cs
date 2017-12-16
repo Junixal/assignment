@@ -13,15 +13,14 @@ public class ScoreBoard : MonoBehaviour {
     public Text player2_text;
     public int maxScore = 3;
 
-    public int player1Score;
-    public int player2Score;
+    public static int player1Score;
+    public static int player2Score;
 
     // Use this for initialization
     void Start () {
         instance = this;
 
-        player1Score = 0;
-        player2Score = 0;
+        
 
 	}
 	
@@ -35,7 +34,7 @@ public class ScoreBoard : MonoBehaviour {
         player1Score += 1;
         player1_text.text = player1Score.ToString();
 
-        if(player1Score > maxScore)
+        if(player1Score >= maxScore)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
@@ -46,7 +45,7 @@ public class ScoreBoard : MonoBehaviour {
         player2Score += 1;
         player2_text.text = player2Score.ToString();
 
-        if (player2Score > maxScore)
+        if (player2Score >= maxScore)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }

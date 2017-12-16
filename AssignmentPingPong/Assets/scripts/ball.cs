@@ -13,7 +13,7 @@ public class ball : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GetComponent<Rigidbody2D>().velocity = Vector2.right * move;
+        //GetComponent<Rigidbody2D>().velocity = Vector2.right * move;
 
         StartCoroutine(Pause());
         BallRigid = this.GetComponent<Rigidbody2D>();
