@@ -13,11 +13,13 @@ public class Level3ScoreSystem : MonoBehaviour {
     public int maxScore = 3;
 
     public static int player1Score;
-    public static int player2Score;
+    public static int player2Score;//static so the score will be saved trough out the all the scenes
 
 	// Use this for initialization
 	void Start () {
         instance = this;
+        player1Score = ScoreBoard.player1Score;//to load the score from the previous script due to being another script
+        player2Score = ScoreBoard.player2Score;
     }
 	
 	// Update is called once per frame
@@ -27,25 +29,16 @@ public class Level3ScoreSystem : MonoBehaviour {
 
     public void Player1AddScore()
     {
-        player1Score += 1;
-        player1_text.text = player1Score.ToString();
+
+        player1Score += 1;//adds 1
+        player1_text.text = player1Score.ToString(); // changes the player 1 score to the player 1 score (changes it to string)
 
         if (player1Score >= maxScore)
         {
-            if (player1Score > player2Score)
-            {
-                SceneManager.LoadScene(0);
-            }
-        }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //when player1 reaches the max level load that scene
 
-        if (player1Score >= maxScore)
-        {
-            if (player1Score == player2Score)
-            {
-                SceneManager.LoadScene(0);
-            }
-        }
 
+        }
     }
 
     public void Player2AddScore()
@@ -55,18 +48,8 @@ public class Level3ScoreSystem : MonoBehaviour {
 
         if (player2Score >= maxScore)
         {
-            if (player2Score > player1Score)
-            {
-                SceneManager.LoadScene(0);
-            }
-        }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);//when player2 reaches the max level load that scene
 
-        if (player1Score >= maxScore)
-        {
-            if (player1Score == player2Score)
-            {
-                SceneManager.LoadScene(0);
-            }
         }
     }
 }

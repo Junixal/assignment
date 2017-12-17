@@ -13,12 +13,12 @@ public class LevelManager : MonoBehaviour {
 
 public void QuitGame()
 {
-    UnityEditor.EditorApplication.isPlaying = false;
+    UnityEditor.EditorApplication.isPlaying = false; // takes you out of the game
 }
 
 public void LoadNextLevel()
 {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //load next scene
 }
 
 }

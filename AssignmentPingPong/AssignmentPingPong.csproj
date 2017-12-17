@@ -86,6 +86,7 @@
     <Compile Include="Assets\scripts\Paddlemov.cs" />
     <Compile Include="Assets\scripts\ScoreBoard.cs" />
     <Compile Include="Assets\scripts\ball.cs" />
+    <Compile Include="Assets\scripts\ballLevel3.cs" />
     <Compile Include="Assets\scripts\exit.cs" />
     <Compile Include="Assets\scripts\obsticale.cs" />
   </ItemGroup>

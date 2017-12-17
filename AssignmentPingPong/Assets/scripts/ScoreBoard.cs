@@ -14,7 +14,10 @@ public class ScoreBoard : MonoBehaviour {
     public int maxScore = 3;
 
     public static int player1Score;
-    public static int player2Score;
+    public static int player2Score;//static so the score will be saved trough out the all the scenes
+
+
+
 
     // Use this for initialization
     void Start () {
@@ -31,12 +34,15 @@ public class ScoreBoard : MonoBehaviour {
 
     public void Player1AddScore()
     {
-        player1Score += 1;
-        player1_text.text = player1Score.ToString();
 
-        if(player1Score >= maxScore)
+        player1Score += 1;
+        player1_text.text = player1Score.ToString();// changes the player 1 score to the player 1 score (changes it to string)
+
+        if (player1Score >= maxScore)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //when player1 reaches the max level load that scene
+
+
         }
     }
 
@@ -47,7 +53,8 @@ public class ScoreBoard : MonoBehaviour {
 
         if (player2Score >= maxScore)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //when player2 reaches the max level load that scene
+
         }
     }
 }

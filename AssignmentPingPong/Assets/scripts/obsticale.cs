@@ -14,7 +14,7 @@ public class obsticale : MonoBehaviour {
         movespeed += (Time.deltaTime * 0.5f);
         
 
-        transform.Rotate(0,0, movespeed);
+        transform.Rotate(0,0, movespeed);//rotates at the movespeed
 
 
 

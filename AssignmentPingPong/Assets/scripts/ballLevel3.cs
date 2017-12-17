@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ball : MonoBehaviour {
+public class ballLevel3 : MonoBehaviour {
     public float move = 30; //made public for easier tweaking
 
     private Rigidbody2D BallRigid;
-    
-
-    
 
 
-	// Use this for initialization
-	void Start () {
-        
+
+
+
+    // Use this for initialization
+    void Start()
+    {
+
 
         StartCoroutine(Pause());
         BallRigid = this.GetComponent<Rigidbody2D>();
 
-        
+
 
     }
     float Hit(Vector2 ballPos, Vector2 paddlePos,
@@ -28,17 +29,17 @@ public class ball : MonoBehaviour {
         //-1 <- the bottom of the paddle
         //
         // 0 <- the middle of the paddle
-        //
+        // 
         // 1 <- the top of the paddle
         return (ballPos.y - paddlePos.y) / paddleHeight;
     }
     //colition has the colission information if the ball enteracts with then...
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       //if enteracts with left paddle
-       if (collision.gameObject.name == "paddleLeft")
+        //if enteracts with left paddle
+        if (collision.gameObject.name == "paddleLeft")
         {
-            float y = Hit(transform.position,collision.transform.position,collision.collider.bounds.size.y);
+            float y = Hit(transform.position, collision.transform.position, collision.collider.bounds.size.y);
 
             //calaculate which way the ball is going
             Vector2 way = new Vector2(1, y).normalized;
@@ -57,11 +58,11 @@ public class ball : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = way * move;
         }
 
-        if(collision.gameObject.name == "wallLeft")
+        if (collision.gameObject.name == "wallLeft")
         {
-            this.transform.position = new Vector3(0,0,0);
+            this.transform.position = new Vector3(0, 0, 0);
             BallRigid.velocity = new Vector3(0, 0, 0);
-            ScoreBoard.instance.Player2AddScore();
+            Level3ScoreSystem.instance.Player2AddScore();
             StartCoroutine(Pause());
         }
 
@@ -69,19 +70,18 @@ public class ball : MonoBehaviour {
         {
             this.transform.position = new Vector3(0, 0, 0);
             BallRigid.velocity = new Vector3(0, 0, 0);
-            ScoreBoard.instance.Player1AddScore();// call the function playeraddscore from scoreboard
-            StartCoroutine(Pause());//calls function
+            Level3ScoreSystem.instance.Player1AddScore(); // call the function playeraddscore from scoreboard
+            StartCoroutine(Pause()); // calls this function
         }
     }
 
     void ResetBall()
     {
-        //stops its speed
-        this.transform.position = new Vector3(0,0,0);
-        int DirectY = Random.Range(-1, 2);//goes into a random direction
-        int DirectX = Random.Range(-1, 2);
+        this.transform.position = new Vector3(0, 0, 0);
+        int DirectY = Random.Range(-1, 2);
+        int DirectX = Random.Range(-1, 2);//goes into a random direction
 
-        if(DirectX == 0)
+        if (DirectX == 0)
         {
             DirectX = 1; // so that the ball launches
         }
@@ -89,18 +89,18 @@ public class ball : MonoBehaviour {
         BallRigid.velocity = new Vector2(move * DirectX, move * DirectY);//makes it move that direction
     }
 
-    //IEnumenator works with iterations
     IEnumerator Pause()
     {
-        yield return new WaitForSeconds(2f); //waitfor 2 frames
+        yield return new WaitForSeconds(2f);//waitfor 2 frames
 
         ResetBall();//calls resetball function
 
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         move += (Time.deltaTime * 0.05f);//increase the speed per half a frame
     }
-    
+
 }
